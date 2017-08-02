@@ -36,6 +36,8 @@ processes job nodes::
 
   >>> sorted(rv[0].keys())
   ['foo', 'name', 'omgwtf']
+  >>> rv[0]['name']
+  'roflmao'
   >>> rv[0]['foo']
   ['bar', 'baz', 69, 42]
 
@@ -64,5 +66,7 @@ expandos in job nodes pass through as-is::
 
   >>> sorted(rv[0].keys())
   ['foo', 'name', 'omgwtf']
+  >>> rv[0]['name']
+  'x-{roflmao}'
   >>> rv[0]['foo']
   ['bar', 'baz', 69, 42]
