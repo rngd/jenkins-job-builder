@@ -9,11 +9,18 @@ def isolate():
   chdir(mkdtemp('', 'tmp', getcwd()))
 
 class JJBConfig(object):
-  def __init__(cfg):
+  def __init__(
+    cfg
+  , allow_duplicates = False
+  , allow_empty_variables = False
+  , include_path = ''
+  , keep_descriptions = True
+  ):
     cfg.yamlparser = dict(
-      allow_empty_variables = False,
-      include_path = '',
-      keep_descriptions = True,
+      allow_duplicates = allow_duplicates,
+      allow_empty_variables = allow_empty_variables,
+      include_path = include_path,
+      keep_descriptions = keep_descriptions,
     )
 
 from os import chdir, getcwd
