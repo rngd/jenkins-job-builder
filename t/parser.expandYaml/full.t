@@ -17,6 +17,31 @@ uses jobs and job templates plugged into a project::
   >>> input = u"""
   ... - job:
   ...     name: roflmao
+  ... - job-template:
+  ...     name: x-{lol}
+  ... - project:
+  ...     name: snafubar
+  ...     lol: yes
+  ...     jobs:
+  ...       - roflmao
+  ...       - x-{lol}
+  ... """
+  >>> with open("input", "w") as fd:
+  ...   _ = fd.write(input)
+
+  >>> p = cut.YamlParser(JJBConfig())
+  >>> p.parse("input")
+  >>> rv = p.expandYaml(FakeRegistry())
+
+  >>> rv is p.jobs
+  True
+
+  >>> rv[0]['name']
+  'roflmao'
+
+  >>> input = u"""
+  ... - job:
+  ...     name: roflmao
   ...     goal: riches
   ...     fubars:
   ...       - dafubar
@@ -51,18 +76,6 @@ uses jobs and job templates plugged into a project::
   ...     goal:
   ...       - omg
   ...       - wtf
-  ... - builder:
-  ...     name: a-builder
-  ...     builders:
-  ...       - shell: 'make cake'
-  ... - builder:
-  ...     name: b-builder
-  ...     builders:
-  ...       - shell: 'make love'
-  ... - builder:
-  ...     name: x-builder
-  ...     builders:
-  ...       - shell: 'make {goal}'
   ... """
   >>> with open("input", "w") as fd:
   ...   _ = fd.write(input)

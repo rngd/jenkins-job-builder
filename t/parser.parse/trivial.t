@@ -23,8 +23,8 @@ top-level element must be a list::
   >>> try:
   ...   rv = cut.YamlParser(JJBConfig()).parse("input")
   ... except cut.JenkinsJobsException as e:
-  ...   print(repr(e))
-  JenkinsJobsException("The topmost collection in file 'input' must be a list...",)
+  ...   print(e)
+  The topmost collection in file 'input' must be a list...
 
 
 members of top-level list must be maps::
